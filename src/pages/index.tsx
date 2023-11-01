@@ -7,7 +7,7 @@ import SearchHistory from '@/components/molecules/SearchHistory'
 import SearchBox from '@/components/molecules/SearchBox'
 import RecipeBoard from '@/components/molecules/RecipeBoard'
 
-const Home = () => {
+const Home = () : JSX.Element => {
 
   return (
     <>

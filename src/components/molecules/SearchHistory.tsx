@@ -6,7 +6,7 @@ const SearchHistory = () : JSX.Element => {
   return (
     <>
       <div className={styles.container}>
-
+        
       </div>
     </>
   )
