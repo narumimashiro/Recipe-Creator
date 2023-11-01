@@ -19,10 +19,10 @@ const Home = () => {
       </Head>
       <div className={styles.container}>
         <SearchHistory />
-        <ul className={styles['recipe-area']}>
+        <div className={styles['recipe-area']}>
           <SearchBox />
           <RecipeBoard />
-        </ul>
+        </div>
       </div>
     </>
   )

@@ -1,3 +1,3 @@
-# プロジェクトスタート用Branch
+# Recipe Creator
 
-ここをCloneすれば、すぐに開始できる初期プロジェクト
+chatGPTを利用したWebサービスをお試し創作
