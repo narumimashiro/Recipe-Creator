@@ -18,7 +18,7 @@ const Home = () : JSX.Element => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={styles.container}>
-        <SearchHistory />
+      <SearchHistory />
         <div className={styles['recipe-area']}>
           <SearchBox />
           <RecipeBoard />

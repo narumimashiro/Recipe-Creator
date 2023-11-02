@@ -9,6 +9,7 @@ import { IngredientsList } from '@/recoil/Ingredients'
 
 // constant
 const TITLE = '食材'
+const PLACEHOLDER = '食材を入力してください'
 
 const Ingredients = () : JSX.Element => {
 
@@ -30,7 +31,7 @@ const Ingredients = () : JSX.Element => {
                 <Input
                   key={index}
                   className={styles['mui-input']}
-                  placeholder='食材を入力してください'
+                  placeholder={PLACEHOLDER}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => InputData(e, index)}
                 />
             ))
