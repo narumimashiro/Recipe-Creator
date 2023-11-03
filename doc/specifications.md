@@ -5,6 +5,8 @@
 ### フロントエンド
 
 - NextJs
+- Recoil
+- MaterialUI
 
 ### データベース
 
