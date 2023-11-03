@@ -14,7 +14,6 @@ const TITLE = 'キーワード'
 const PLACEHOLDER = 'キーワードを入力してください'
 type KeywordButton = {
   label: string,
-
 }
 const KEYLIST = [
   '和食', '中華', 'イタリアン', '韓国風',

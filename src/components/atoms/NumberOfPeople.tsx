@@ -24,6 +24,7 @@ const NumberOfPeople = () : JSX.Element => {
         <Select
           className={styles['select-box']}
           id='number-of-people'
+          variant='standard'
           value={servings}
           onChange={(e: SelectChangeEvent) => setServings(e.target.value)}
         >
