@@ -4,6 +4,7 @@
  */
 
 import type { NextApiRequest, NextApiResponse } from 'next'
+import axios from 'axios'
 
 const handler = async (
   req: NextApiRequest,
@@ -11,24 +12,22 @@ const handler = async (
 ) => {
 
   const apiGateway = process.env.API_GATEWAY
+  const {section} = req.body
 
-  const api_url = apiGateway + '?param1=get_history'
+  const api_url = apiGateway + `?param1=${section}`
 
-  if(apiGateway) {
-    fetch(api_url)
-      .then(res => {
-        if(!res.ok) {
-          throw new Error('Server error')
-        }
-        return res.json()
-      })
-      .then(data => {
-        return res.status(200).json(data)
-      })
-      .catch(err => {
-        console.error('Fetch error', err)
-        return res.status(404).json('Failed API')
-      })
+  if (apiGateway) {
+    try {
+      const response = await axios.get(api_url)
+      const resData = response.data
+      res.status(200).json(resData)
+    }
+    catch (err) {
+      console.error(err)
+      res.status(500).json({'message': 'API Axios error'})
+    }
+  } else {
+    res.status(400).json({ error: 'API_GATEWAY not defined' });
   }
 }
 export default handler
