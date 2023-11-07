@@ -9,6 +9,10 @@ class SearchHistory:
 # data
     table_name = os.environ['TABLE_NAME']
     partition_key = os.environ['PARTITION_KEY']
+<<<<<<< Updated upstream
+=======
+    new_index = 3
+>>>>>>> Stashed changes
 
 # method
     def __init__(self):
@@ -57,4 +61,45 @@ class SearchHistory:
                 'context': context
             })
 
+<<<<<<< Updated upstream
         return res_data
+=======
+        return res_data
+    
+    @classmethod
+    def setQueryData(cls, data):
+        dynamodb = boto3.resource('dynamodb')
+        table = dynamodb.Table(os.environ['TABLE_NAME'])
+
+        for i in range(2):
+            table.update_item(
+                Key={
+                    'recipe_search_history': os.environ['PARTITION_KEY_VALUE'],
+                    'index': i + 2
+                },
+                UpdateExpression='SET index = :value',
+                ExpressionAttributeValues={
+                    ':value': i + 1
+                }
+            )
+            
+        table.put_item(
+            Item={
+                'recipe_search_history': os.environ['PARTITION_KEY_VALUE'],
+                'create_date': data['created'],
+                'context': data['choices'][0]['message']['content'],
+                'index': cls.new_index
+            }
+        )
+            
+    @classmethod
+    def deleteQueryData(cls, index):
+        dynamodb = boto3.resource('dynamodb')
+        table = dynamodb.Table(os.environ['TABLE_NAME'])
+        table.delete_item(
+            Key={
+                'recipe_search_history': os.environ['PARTITION_KEY_VALUE'],
+                'index': index
+            }
+        )
+>>>>>>> Stashed changes
