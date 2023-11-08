@@ -1,5 +1,9 @@
+import { useState } from 'react'
 import styles from '@/styles/components/SearchHistory.module.sass'
 import axios from 'axios'
+
+// MyComponents
+import ModalHistory from '@/components/atoms/ModalHistory'
 
 // MaterialUI
 import Button from '@mui/material/Button'
@@ -12,9 +16,15 @@ import { RecipeHistory } from '@/recoil/RecipeHistory'
 // constant
 const HISTORY = '履歴'
 
+export type RecipeHistory = {
+  index: number,
+  create_date: string,
+  context: string,
+}
 const SearchHistory = () : JSX.Element => {
   
-  const [recipeHistory, setRecipeHistory] = useRecoilState(RecipeHistory)
+  const [recipeHistory, setRecipeHistory] = useState<RecipeHistory[]>()
+  const [isModalOpen, setModalOpen] = useState(false)
 
   const getHistory = async () => {
     const params = {
@@ -27,6 +37,7 @@ const SearchHistory = () : JSX.Element => {
       .catch(err => {
         console.error('Failed fetch data', err)
       })
+    setModalOpen(true)
   }
 
   return (
@@ -43,6 +54,11 @@ const SearchHistory = () : JSX.Element => {
             {HISTORY}
           </Button>
         </div>
+        <ModalHistory
+          open={isModalOpen}
+          history={recipeHistory}
+          onClose={() => setModalOpen(false)}
+        />
       </div>
     </>
   )
