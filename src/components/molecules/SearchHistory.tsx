@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import styles from '@/styles/components/SearchHistory.module.sass'
 import axios from 'axios'
 
@@ -10,7 +10,6 @@ import Button from '@mui/material/Button'
 import HistoryIcon from '@mui/icons-material/History';
 
 // Recoil
-import { useRecoilState } from 'recoil'
 import { RecipeHistory } from '@/recoil/RecipeHistory'
 
 // constant
@@ -25,14 +24,18 @@ const SearchHistory = () : JSX.Element => {
   
   const [recipeHistory, setRecipeHistory] = useState<RecipeHistory[]>()
   const [isModalOpen, setModalOpen] = useState(false)
+  const dispatch = useRef(false)
 
   const getHistory = async () => {
+    if (dispatch.current) return
+    dispatch.current = true
     const params = {
       section: 'get_history'
     }
     await axios.post('/api/control_database', {...params})
       .then(res => {
         setRecipeHistory(res.data)
+        dispatch.current = false
       })
       .catch(err => {
         console.error('Failed fetch data', err)
