@@ -13,6 +13,10 @@ const handler = async (
 
   const { prompt } = req.body
 
+  if (process.env.PROD_ENV == 'false') {
+    res.status(200).json('Sorry, u cannot use this service now')
+  }
+
   const openai = new OpenAI()
   const response = await openai.chat.completions.create({
     model: "gpt-3.5-turbo",
