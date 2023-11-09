@@ -1,4 +1,3 @@
-import { useEffect, useRef } from 'react'
 import styles from '@/styles/components/KeywordInput.module.sass'
 
 // MaterialUI
@@ -25,6 +24,10 @@ const KeywordButton = (props: KeywordButton) : JSX.Element => {
 
   const [keyList, setKeyList] = useRecoilState(KeyList)
 
+  const isValid = () => {
+    return !keyList.includes(props.label) && (keyList.length === 3)
+  }
+
   const getColor = () => {
     return keyList.includes(props.label) ? 'warning' : 'inherit'
   }
@@ -45,6 +48,7 @@ const KeywordButton = (props: KeywordButton) : JSX.Element => {
         className={styles['mui-button']}
         color={getColor()}
         variant='text'
+        disabled={isValid()}
         onClick={() => pushKeyList(props.label)}
       >
         {props.label}

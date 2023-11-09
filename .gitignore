@@ -34,7 +34,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# script
-/script/diff_winmerge/*.txt
-/script/diff_winmerge/*.xlsx
-/script/diff_winmerge/*.html
+# backend
+/backend/__pycache__
+/backend/memo.txt
