@@ -9,16 +9,13 @@ class SearchHistory:
 # data
     table_name = os.environ['TABLE_NAME']
     partition_key = os.environ['PARTITION_KEY']
-<<<<<<< Updated upstream
-=======
     new_index = 3
->>>>>>> Stashed changes
 
 # method
     def __init__(self):
         pass
       
-    def __delete__(self):
+    def __del__(self):
         pass
 
     @staticmethod
@@ -61,11 +58,8 @@ class SearchHistory:
                 'context': context
             })
 
-<<<<<<< Updated upstream
         return res_data
-=======
-        return res_data
-    
+
     @classmethod
     def setQueryData(cls, data):
         dynamodb = boto3.resource('dynamodb')
@@ -82,7 +76,7 @@ class SearchHistory:
                     ':value': i + 1
                 }
             )
-            
+
         table.put_item(
             Item={
                 'recipe_search_history': os.environ['PARTITION_KEY_VALUE'],
@@ -91,7 +85,7 @@ class SearchHistory:
                 'index': cls.new_index
             }
         )
-            
+
     @classmethod
     def deleteQueryData(cls, index):
         dynamodb = boto3.resource('dynamodb')
@@ -102,4 +96,3 @@ class SearchHistory:
                 'index': index
             }
         )
->>>>>>> Stashed changes
