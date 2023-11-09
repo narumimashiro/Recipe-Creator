@@ -12,7 +12,7 @@ const handler = async (
 ) => {
 
   const apiGateway = process.env.API_GATEWAY
-  const {section} = req.body
+  const { section } = req.body
 
   const api_url = apiGateway + `?param1=${section}`
 
