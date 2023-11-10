@@ -57,6 +57,7 @@ const SearchButton = () : JSX.Element => {
       })
       .catch(err => {
         console.error('Failed fetch', err)
+        setRecipe(err.response.data)
       })
   }
 
