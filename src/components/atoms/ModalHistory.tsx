@@ -9,7 +9,11 @@ import Typography from '@mui/material/Typography'
 import Pagination from '@mui/material/Pagination'
 import Stack from '@mui/material/Stack'
 
+ // My components
 import { RecipeHistory } from '@/components/molecules/SearchHistory'
+
+// funtion
+import { converterUrlEncode } from '@/function/converterString'
 
 type Props = {
   open: boolean
@@ -23,15 +27,15 @@ const ModalHistory = (props: Props): JSX.Element => {
 
   const getDate = (page: number) => {
     if (props.history) {
-      const res = props.history.find(el => el.index == page)
+      const res = props.history.find(el => el.item_index == page)
       return res!.create_date
     }
   }
 
   const getContext = (page: number) => {
     if (props.history) {
-      const res = props.history.find(el => el.index == page)
-      return res!.context
+      const res = props.history.find(el => el.item_index == page)
+      return converterUrlEncode(res!.context)
     }
   }
 
