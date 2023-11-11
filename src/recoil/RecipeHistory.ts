@@ -1,7 +1,7 @@
 import { atom } from 'recoil'
 
 export type TypeRecipeHistory = {
-  index: number,
+  item_index: number,
   create_date: string,
   context: string,
 }

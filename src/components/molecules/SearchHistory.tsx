@@ -16,7 +16,7 @@ import { RecipeHistory } from '@/recoil/RecipeHistory'
 const HISTORY = '履歴'
 
 export type RecipeHistory = {
-  index: number,
+  item_index: number,
   create_date: string,
   context: string,
 }
@@ -32,7 +32,7 @@ const SearchHistory = () : JSX.Element => {
     const params = {
       section: 'get_history'
     }
-    await axios.post('/api/control_database', {...params})
+    await axios.post('/api/get_history', {...params})
       .then(res => {
         setRecipeHistory(res.data)
         dispatch.current = false

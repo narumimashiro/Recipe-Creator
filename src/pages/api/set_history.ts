@@ -1,6 +1,6 @@
 /**
  * DynamoDBとのやりとり
- * Recipe履歴保存、取得 
+ * Recipe履歴保存
  */
 
 import type { NextApiRequest, NextApiResponse } from 'next'
@@ -12,9 +12,9 @@ const handler = async (
 ) => {
 
   const apiGateway = process.env.API_GATEWAY
-  const { section } = req.body
+  const { section, recipe } = req.body
 
-  const api_url = apiGateway + `?param1=${section}`
+  const api_url = apiGateway + `?param1=${section}` + `&param2=${recipe}`
 
   if (apiGateway) {
     try {
@@ -27,7 +27,8 @@ const handler = async (
       res.status(500).json({'message': 'API Axios error'})
     }
   } else {
-    res.status(400).json({ error: 'API_GATEWAY not defined' });
+    res.status(400).json({ error: 'API_GATEWAY not defined' })
   }
+
 }
 export default handler
