@@ -3,8 +3,7 @@
  */
 
 import type { NextApiRequest, NextApiResponse } from 'next'
-import OpenAI, { ClientOptions } from 'openai'
-import Configuration from 'openai'
+import OpenAI from 'openai'
 
 const handler = async (
   req: NextApiRequest,
