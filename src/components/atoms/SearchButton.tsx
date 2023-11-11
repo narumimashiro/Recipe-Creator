@@ -15,6 +15,7 @@ import { Recipe } from '@/recoil/Recipe'
 
 // function
 import { createPrompt } from '@/function/createPrompt'
+import { converterNewLine } from '@/function/converterString'
 
 // constant
 const LABEL = '検索'
@@ -39,6 +40,7 @@ const SearchButton = () : JSX.Element => {
   const searchRecipe = async () => {
     if (dispatch.current) return
     dispatch.current = true
+    setRecipe('')
     const prompt = createPrompt(
       {
         ingredients: ingredients,
@@ -51,9 +53,21 @@ const SearchButton = () : JSX.Element => {
       prompt: prompt
     }
     await axios.post('/api/send_prompt', {...params})
-      .then(res => {
+      .then(async res => {
         setRecipe(res.data)
         dispatch.current = false
+
+        const params = {
+          section: 'set_history',
+          recipe: converterNewLine(res.data)
+        }
+        await axios.post('/api/set_history', { ...params })
+          .then(res => {
+            console.log(res.data) // for debug
+          })
+          .catch(err => {
+            console.error('Failed fetch', err)
+        })
       })
       .catch(err => {
         console.error('Failed fetch', err)
